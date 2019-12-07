@@ -1,8 +1,7 @@
 
 package com.mycompany.webservicesca2.services;
 
-import com.mycompany.webservicesca2.models.Account;
-import com.mycompany.webservicesca2.models.Customer;
+import com.mycompany.webservicesca2.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +45,14 @@ public class AccountService {
     
     public List<Account> getAllAccounts() {
     	return accountList;
+	}
+
+	public int newAccountNumber(int customerId) {
+		int accNum = 101;
+    	while (getAccount(customerId, accNum).size() > 0) {
+    		accNum++;
+		}
+    	return accNum;
 	}
     
     public List<Account> getAccount(int customerId, int accountId) {
@@ -98,8 +105,7 @@ public class AccountService {
     	System.out.println("tempAccountList: " + tempAccountList.size());	
     	return tempAccountList;
 	}
-  
-    
+
     public Account createAccount(Account account) {
 		// account.setAccountNumber(accountList.size() + 1);
 		accountList.add(account);
@@ -107,7 +113,54 @@ public class AccountService {
 		System.out.println("201 - resource created with path: /account/" + String.valueOf("Create Account: " + account.getAccountNumber()));
 		
 		return account;
-	 }
+    }
+
+    public Account lodgeToAccount(int customerId, int accountId, Lodgement lodgement) {
+    	List<Account> accounts = getAccount(customerId, accountId);
+    	if (accounts.size() > 0) {
+    		Account account = accounts.get(0);
+			account.setBalance(account.getBalance() + lodgement.getAmount());
+			return account;
+		}
+    	return null;
+	}
+
+	public Account withdrawFromAccount(int customerId, int accountId, Withdrawal withdrawal) {
+		List<Account> accounts = getAccount(customerId, accountId);
+		if (accounts.size() > 0) {
+			Account account = accounts.get(0);
+			if (account.getBalance() < withdrawal.getAmount()) {
+				return null;
+			}
+			account.setBalance(account.getBalance() - withdrawal.getAmount());
+			return account;
+		}
+		return null;
+	}
+
+	public Account transferToAccount(int customerId, int accountId, Transfer transfer) {
+		List<Account> accounts = getAccount(customerId, accountId);
+		Account sourceAccount = null;
+		if (accounts.size() > 0) {
+			sourceAccount = accounts.get(0);
+		} else {
+			return null;
+		}
+		accounts = getAccount(transfer.getDestCustomer(), transfer.getDestAccount());
+		Account destAccount = null;
+		if (accounts.size() > 0) {
+			destAccount = accounts.get(0);
+		} else {
+			return null;
+		}
+		if (sourceAccount.getBalance() < transfer.getAmount()) {
+			return null;
+		}
+		sourceAccount.setBalance(sourceAccount.getBalance() - transfer.getAmount());
+		destAccount.setBalance(destAccount.getBalance() + transfer.getAmount());
+
+		return sourceAccount;
+	}
     
     public Account deleteAccount(int id, Account account) {
     	

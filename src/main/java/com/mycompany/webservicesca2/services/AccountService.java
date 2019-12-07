@@ -73,6 +73,31 @@ public class AccountService {
     	System.out.println("tempAccountList: " + tempAccountList.size());	
     	return tempAccountList;
 	}
+    
+    public List<Account> getAccount(int accountId) {
+    	
+    	
+    	System.out.println("AccountService accountId: " + accountId);
+    	
+    	tempAccountList.clear();
+
+    	for(int i = 0; i < accountList.size(); i++) {
+    		
+    		if(accountList.get(i).getAccountNumber() == accountId) {
+
+    			System.out.println("acc: " + accountList.get(i).getAccountNumber());
+    			    			
+    			tempAccountList.add(accountList.get(i));
+    			
+    			if(tempAccountList.size() == 0) {
+    				return new ArrayList<>();
+    			}
+			}	
+    	}
+    	
+    	System.out.println("tempAccountList: " + tempAccountList.size());	
+    	return tempAccountList;
+	}
   
     
     public Account createAccount(Account account) {
@@ -82,6 +107,17 @@ public class AccountService {
 		System.out.println("201 - resource created with path: /account/" + String.valueOf("Create Account: " + account.getAccountNumber()));
 		
 		return account;
+	 }
+    
+    public Account deleteAccount(int id, Account account) {
+    	
+    	if(account.getAccountNumber() == id) { 	
+    		accountList.remove(account);
+    	}
+		
+		System.out.println("201 - resource delete with path: /account/" + String.valueOf("Delete Account: " + account.getAccountNumber()));
+		
+		return new Account();
 	 }
 
 

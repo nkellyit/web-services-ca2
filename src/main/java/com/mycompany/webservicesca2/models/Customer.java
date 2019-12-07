@@ -20,50 +20,17 @@ public class Customer {
 
 	private String firstName;
     private String lastName;
-    private String addressLine1;
-    private String addressLine2;
-    private String addressLine3;
     private String email;
-    private Long id;
-    //
-    private Map<String, Account> accounts = new HashMap<>();
-    //
-    private List<Account> accountList;
-    private long customerId = 000L;
+    private int id;
     
 	public Customer() {  }
 
-    public Customer(long id, String firstName, String lastName, String email) {
+    public Customer(int id, String firstName, String lastName, String email) {
     	this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-      //  this.addressLine1 = "n/a";
-      //  this.addressLine2 = "n/a";
-      //  this.addressLine3 = "n/a";
-    
-       // this.accountList = new ArrayList<>();  
-        
-        // this.accounts.put("000L", new Account());
-        
-       
-        
-       // createAccount(100L, 001, 999L, "accountType");
     }
-
-    
-    /*  public Customer(String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3, String email) {
-     
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.addressLine3 = addressLine3;
-        this.email = email;
-        accountList = new ArrayList<>();
-    }
-    */
-    
     
     public String getFirstName() {
 		return firstName;
@@ -89,36 +56,14 @@ public class Customer {
 		this.email = email;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-    
-    
-    
-    
-   
-    
-    /*
-    public void createAccount(long customerId, int sortCode, long accountNumber, String accountType) {
-    	
-    	String newcustomerId = Long.toString(customerId);
-    	newcustomerId = newcustomerId + "_" + Long.toString(accountNumber);
-    	
-    	System.out.println(newcustomerId);
-    	
-    	if(!accounts.containsKey(newcustomerId)) {
-    		accounts.put(newcustomerId, new Account(sortCode, accountNumber, accountType, customerId));
-    	}
-    	else {
-    		System.out.println("Account already exists");
-    	}
-    }
-    */
-    
+	
 }
 
 

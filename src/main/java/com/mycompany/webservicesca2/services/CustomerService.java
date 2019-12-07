@@ -20,9 +20,9 @@ public class CustomerService {
 
 		if (init) {
 
-			Customer kevin = new Customer(1L, "Kevin", "Kerin", "kkkkkkkkkkevin@gmail.com");
-			Customer johnathan = new Customer(2L, "Johnathan", "Munster", "jjjjjjjjjjjohnathan@gmail.com");
-			Customer niall = new Customer(3L, "Niall", "Kelly", "nnnnnnnnnnnniall@gmail.com");
+			Customer kevin = new Customer(101, "Kevin", "Kerin", "kkkkkkkkkkevin@gmail.com");
+			Customer johnathan = new Customer(202, "Johnathan", "Munster", "jjjjjjjjjjjohnathan@gmail.com");
+			Customer niall = new Customer(303, "Niall", "Kelly", "nnnnnnnnnnnniall@gmail.com");
 
 			list.add(kevin);
 			list.add(johnathan);
@@ -37,19 +37,23 @@ public class CustomerService {
 	}
 	
 	public Customer getCustomer(int id) {
-		return list.get(id - 1);
+		
+		for(Customer customer : list) {
+			if(customer.getId() == id) {
+				return customer;
+			}
+		}
+		return new Customer(0, "", "", "");
 	}
 	
-	/*
 	public Customer createCustomer(Customer c) {
-		c.setCustomerId(list.size() + 1);
+	//	c.setId(list.size() + 1);
 		list.add(c);
-
-		System.out.println("201 - resource created with path: /customers/" + String.valueOf(c.getCustomerId()));
-
+		
+		System.out.println("201 - resource created with path: /customers/" + String.valueOf("Create Customer: " + c.getId()));
+		
 		return c;
-	}
+	 }
 	
-	*/
-
+	
 }

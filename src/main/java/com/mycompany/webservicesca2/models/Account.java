@@ -1,35 +1,31 @@
 
 package com.mycompany.webservicesca2.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author 
  */
+
 @XmlRootElement
 public class Account {
 	
 	private int sortCode;
-    private long accountNumber;
+	private int accountNumber;
     private String accountType;
     private double balance;
-    private List<Transaction> transactionList;
-    private Long customerId;
+    private int customerId;
 
     public Account() {  }
     
-    public Account(int sortCode, long accountNumber, String accountType, long customerId) {
+    public Account(int sortCode, int accountNumber, String accountType, double balance, int customerId) {
         this.sortCode = sortCode;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.customerId = customerId;
-        this.balance = 0;
-        transactionList = new ArrayList<>();
+        this.balance = balance;
     }
-
     
     public int getSortCode() {
 		return sortCode;
@@ -39,11 +35,11 @@ public class Account {
 		this.sortCode = sortCode;
 	}
 
-	public long getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(long accountNumber) {
+	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 
@@ -55,31 +51,20 @@ public class Account {
 		this.accountType = accountType;
 	}
 
-	public Long getCustomerId() {
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public int getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Long customerId) {
+	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
     
-
-    /*
-    
-    public String getTransactionList() {
-        String result = "[";
-        for (Transaction a : transactionList) {
-            result += "Date: " + a.getDate() + ", Type: " + a.getTransactionType() + ", Amount: " + a.getAmount() + ", Description: " + a.getDescription() + ", Balance: " + a.getNewBalance() + "]\n";
-        }
-        return result;
-    }
-
-    public void newTransaction(String transactionType, double amount, String description) {
-        Transaction t = new Transaction(transactionType, amount, description, balance);
-        this.balance = t.getNewBalance();
-        transactionList.add(t);
-    }
-    
-    */
-
 }

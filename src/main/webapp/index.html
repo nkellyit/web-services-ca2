@@ -15,42 +15,41 @@
         <button id="sign-up" onclick="createCustomer()">Create Customer</button>
         <a href="accounts.html">I have an account already</a>
 
-        <!--Create customer function - uses ajax to create URL with new customer details-->
         <script type="text/javascript">
-            function createCustomer() {
-                var customerBox = document.getElementById("customerId");
-                var pinBox = document.getElementById("pin");
-                var firstNameBox = document.getElementById("firstName");
-                var lastNameBox = document.getElementById("lastName");
-                var emailBox = document.getElementById("email");
-                var customerId = customerBox.value;
-                var firstName = firstNameBox.value;
-                var lastName = lastNameBox.value;
-                var email = emailBox.value;
-                var pin = pinBox.value;
+                    function createCustomer() {
+                        var customerBox = document.getElementById("customerId");
+                        var pinBox = document.getElementById("pin");
+                        var firstNameBox = document.getElementById("firstName");
+                        var lastNameBox = document.getElementById("lastName");
+                        var emailBox = document.getElementById("email");
+                        var customerId = customerBox.value;
+                        var firstName = firstNameBox.value;
+                        var lastName = lastNameBox.value;
+                        var email = emailBox.value;
+                        var pin = pinBox.value;
 
-                var customer = {
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "email": email,
-                    "id": customerId,
-                    "pin": pin
-                };
-            <!--Ajax code which creates POST request-->
-                $.ajax({
-                        url: "http://localhost:55000/api/customers",
-                        type: "POST",
-                        data: JSON.stringify(customer),
-                        contentType: "application/json",
-                        success: function(data) {
-                            window.location.replace("accounts.html");
-                        },
-                        error: function(textStatus, errorThrown) {
-                            alert("error");
-                        }
+                        var customer = {
+                            "firstName": firstName,
+                            "lastName": lastName,
+                            "email": email,
+                            "id": customerId,
+                            "pin": pin
+                        };
+
+                        $.ajax({
+                                url: "http://localhost:55000/api/customers",
+                                type: "POST",
+                                data: JSON.stringify(customer),
+                                contentType: "application/json",
+                                success: function(data) {
+                                    window.location.replace("accounts.html");
+                                },
+                                error: function(textStatus, errorThrown) {
+                                    alert("error");
+                                }
+                            }
+                        );
                     }
-                );
-            }
-        </script>
+                </script>
     </body>
 </html>

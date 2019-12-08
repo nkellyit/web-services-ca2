@@ -6,44 +6,41 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>Withdraw</h1>
+    <h1>Withdraw</h1>
 
-<input type="text" id="customerId" placeholder="Customer Id" />
-<input type="text" id="accountId" placeholder="From Account Number" />
-<input type="text" id="ccNum" placeholder="To Credit card number" />
-<input type="text" id="amount" placeholder="Amount" />
-<input type="password" id="pin" placeholder="Your PIN" />
-<button id="sign-up" onclick="withdraw()">Withdraw</button>
+    <input type="text" id="customerId" placeholder="Customer Id" />
+    <input type="text" id="accountId" placeholder="From Account Number" />
+    <input type="text" id="ccNum" placeholder="To Credit card number" />
+    <input type="text" id="amount" placeholder="Amount" />
+    <input type="password" id="pin" placeholder="Your PIN" />
+    <button id="sign-up" onclick="withdraw()">Withdraw</button>
 
-<script type="text/javascript">
-    <!--Withdraw function-->
-    function withdraw() {
-        var customerBox = document.getElementById("customerId");
-        var accountIdBox = document.getElementById("accountId");
-        var ccNumBox = document.getElementById("ccNum");
-        var amountBox = document.getElementById("amount");
-        var pinBox = document.getElementById("pin");
+    <script type="text/javascript">
+        function withdraw() {
+            var customerBox = document.getElementById("customerId");
+            var accountIdBox = document.getElementById("accountId");
+            var ccNumBox = document.getElementById("ccNum");
+            var amountBox = document.getElementById("amount");
+            var pinBox = document.getElementById("pin");
 
-        <!--Ajax code which creates POST request-->
-
-        $.ajax({
-                url: "http://localhost:55000/api/customers/" + customerBox.value + "/accounts/" + accountIdBox.value + "/withdraw",
-                data: JSON.stringify({
-                    "amount": parseFloat(amountBox.value),
-                    "ccNum": parseInt(ccNumBox.value),
-                    "pin": parseInt(pinBox.value)
-                }),
-                type: "POST",
-                contentType: "application/json",
-                success: function(data) {
-                    window.location.replace("accounts.html");
-                },
-                error: function(textStatus, errorThrown) {
-                    alert("error");
+            $.ajax({
+                    url: "http://localhost:55000/api/customers/" + customerBox.value + "/accounts/" + accountIdBox.value + "/withdraw",
+                    data: JSON.stringify({
+                        "amount": parseFloat(amountBox.value),
+                        "ccNum": parseInt(ccNumBox.value),
+                        "pin": parseInt(pinBox.value)
+                    }),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function(data) {
+                        window.location.replace("accounts.html");
+                    },
+                    error: function(textStatus, errorThrown) {
+                        alert("error");
+                    }
                 }
-            }
-        );
-    }
-</script>
+            );
+        }
+    </script>
 </body>
 </html>

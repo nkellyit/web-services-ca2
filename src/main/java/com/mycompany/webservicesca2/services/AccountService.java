@@ -8,21 +8,21 @@ import java.util.List;
 
 /**
  *
- * @author 
+ * @author
  */
 public class AccountService {
 
 	//Variables
 	public static List<Account> accountList = new ArrayList<>();
 	public static List<Account> tempAccountList = new ArrayList<>();
-    public static boolean init = true;
+	public static boolean init = true;
 
-    //Constructor
-    public AccountService() {
-  
-    	if (init) {
+	//Constructor
+	public AccountService() {
 
-    		//Dummy data
+		if (init) {
+
+			//Dummy data
 			Account acc1 = new Account(990, 1234, "savings", 0, 101);
 			Account acc1a = new Account(990, 1234, "deposit", 0, 101);
 			//
@@ -41,96 +41,97 @@ public class AccountService {
 			accountList.add(acc3a);
 
 			init = false;
-    	
-    	}
-    }
 
-    //Get all account details method
-    public List<Account> getAllAccounts() {
-    	return accountList;
+		}
+	}
+
+	//Get all account details method
+	public List<Account> getAllAccounts() {
+		return accountList;
 	}
 
 	//Method to create a new account number for each new account creation.
 	//Customers with the same account number can be identified by their customer ID
 	public int newAccountNumber(int customerId) {
 		int accNum = 101;
-    	while (getAccount(customerId, accNum).size() > 0) {
-    		accNum++;
+		while (getAccount(customerId, accNum).size() > 0) {
+			accNum++;
 		}
-    	return accNum;
+		return accNum;
 	}
 
 	//Method to retrieve account details for specific customer/account
-    public List<Account> getAccount(int customerId, int accountId) {
-    	
-    	System.out.println("AccountService customerId: " + customerId);
-    	System.out.println("AccountService accountId: " + accountId);
-    	
-    	tempAccountList.clear();
+	public List<Account> getAccount(int customerId, int accountId) {
 
-    	for(int i = 0; i < accountList.size(); i++) {
-    		
-    		if(accountList.get(i).getCustomerId() == customerId && accountList.get(i).getAccountNumber() == accountId ) {
+		System.out.println("AccountService customerId: " + customerId);
+		System.out.println("AccountService accountId: " + accountId);
 
-    			System.out.println("cust: " + accountList.get(i).getCustomerId());
-    			System.out.println("acc: " + accountList.get(i).getAccountNumber());
-    			    			
-    			tempAccountList.add(accountList.get(i));
-    			
-    			if(tempAccountList.size() == 0) {
-    				return new ArrayList<>();
-    			}
-			}	
-    	}
-    	
-    	System.out.println("tempAccountList: " + tempAccountList.size());	
-    	return tempAccountList;
+		tempAccountList.clear();
+
+		for(int i = 0; i < accountList.size(); i++) {
+
+			if(accountList.get(i).getCustomerId() == customerId && accountList.get(i).getAccountNumber() == accountId ) {
+
+				System.out.println("cust: " + accountList.get(i).getCustomerId());
+				System.out.println("acc: " + accountList.get(i).getAccountNumber());
+
+				tempAccountList.add(accountList.get(i));
+
+				if(tempAccountList.size() == 0) {
+					return new ArrayList<>();
+				}
+			}
+		}
+
+		System.out.println("tempAccountList: " + tempAccountList.size());
+		return tempAccountList;
 	}
 
-	//Method to
-    public List<Account> getAccount(int accountId) {
-    	System.out.println("AccountService accountId: " + accountId);
-    	
-    	tempAccountList.clear();
+	//Method to get account details
+	public List<Account> getAccount(int accountId) {
 
-    	for(int i = 0; i < accountList.size(); i++) {
-    		
-    		if(accountList.get(i).getAccountNumber() == accountId) {
 
-    			System.out.println("acc: " + accountList.get(i).getAccountNumber());
-    			    			
-    			tempAccountList.add(accountList.get(i));
-    			
-    			if(tempAccountList.size() == 0) {
-    				return new ArrayList<>();
-    			}
-			}	
-    	}
-    	
-    	System.out.println("tempAccountList: " + tempAccountList.size());	
-    	return tempAccountList;
+		System.out.println("AccountService accountId: " + accountId);
+
+		tempAccountList.clear();
+
+		for(int i = 0; i < accountList.size(); i++) {
+
+			if(accountList.get(i).getAccountNumber() == accountId) {
+
+				System.out.println("acc: " + accountList.get(i).getAccountNumber());
+
+				tempAccountList.add(accountList.get(i));
+
+				if(tempAccountList.size() == 0) {
+					return new ArrayList<>();
+				}
+			}
+		}
+
+		System.out.println("tempAccountList: " + tempAccountList.size());
+		return tempAccountList;
 	}
 
 	//Method to create new account
-    public Account createAccount(Account account) {
-		// account.setAccountNumber(accountList.size() + 1);
+	public Account createAccount(Account account) {
 		account.setAccountNumber(newAccountNumber(account.getCustomerId()));
 		accountList.add(account);
-		
-		System.out.println("201 - resource created with path: /account/" + String.valueOf("Create Account: " + account.getAccountNumber()));
-		
-		return account;
-    }
 
-    //Method to lodge funds to existing account
-    public Account lodgeToAccount(int customerId, int accountId, Lodgement lodgement) {
-    	List<Account> accounts = getAccount(customerId, accountId);
-    	if (accounts.size() > 0) {
-    		Account account = accounts.get(0);
+		System.out.println("201 - resource created with path: /account/" + String.valueOf("Create Account: " + account.getAccountNumber()));
+
+		return account;
+	}
+
+	//Method to lodge funds to existing account
+	public Account lodgeToAccount(int customerId, int accountId, Lodgement lodgement) {
+		List<Account> accounts = getAccount(customerId, accountId);
+		if (accounts.size() > 0) {
+			Account account = accounts.get(0);
 			account.setBalance(account.getBalance() + lodgement.getAmount());
 			return account;
 		}
-    	return null;
+		return null;
 	}
 
 	//Method to withdraw from existing account
@@ -175,14 +176,17 @@ public class AccountService {
 	}
 
 	//Method to delete account
-    public Account deleteAccount(int id, Account account) {
-    	
-    	if(account.getAccountNumber() == id) { 	
-    		accountList.remove(account);
-    	}
-		
+	public Account deleteAccount(int id, Account account) {
+
+		if(account.getAccountNumber() == id) {
+			accountList.remove(account);
+		}
+
 		System.out.println("201 - resource delete with path: /account/" + String.valueOf("Delete Account: " + account.getAccountNumber()));
-		
+
 		return new Account();
-	 }
+	}
+
+
+
 }

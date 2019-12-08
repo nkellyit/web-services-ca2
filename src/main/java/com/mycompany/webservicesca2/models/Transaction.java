@@ -4,11 +4,7 @@ package com.mycompany.webservicesca2.models;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
-/**
- *
- * @author 
- */
-//Unsure about XMLRootElement line - please confirm
+
 @XmlRootElement
 public class Transaction {
 

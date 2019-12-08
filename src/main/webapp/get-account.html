@@ -8,15 +8,14 @@
 <body>
     <input type="text" id="customerId" placeholder="Customer Id" />
     <input type="text" id="accountNumber" placeholder="Account Number" />
-    <button onclick="getAccount()">Get account</button>
+    <button onclick="getAccount()">Get Account</button>
     <div id="account"></div>
-    <a href="accounts.html">back to menu</a>
+    <a href="accounts.html">Back to Menu</a>
     <script type="text/javascript">
         function getAccount() {
             var customerId = document.getElementById("customerId");
             var accountNumber = document.getElementById("accountNumber");
 
-        <!--Ajax code which creates GET request for specified user and account-->
             $.ajax({
                     url: "http://localhost:55000/api/customers/" + customerId.value + "/accounts/" + accountNumber.value,
                     type: "GET",

@@ -10,15 +10,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Account {
-	
+
+    //Variables
 	private int sortCode;
 	private int accountNumber;
     private String accountType;
     private double balance;
     private int customerId;
 
+    //Empty Constructor
     public Account() {  }
-    
+
+    //Constructor with parameters
     public Account(int sortCode, int accountNumber, String accountType, double balance, int customerId) {
         this.sortCode = sortCode;
         this.accountNumber = accountNumber;
@@ -26,7 +29,8 @@ public class Account {
         this.customerId = customerId;
         this.balance = balance;
     }
-    
+
+    //Setters and Getters
     public int getSortCode() {
 		return sortCode;
 	}

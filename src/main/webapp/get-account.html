@@ -16,6 +16,7 @@
             var customerId = document.getElementById("customerId");
             var accountNumber = document.getElementById("accountNumber");
 
+        <!--Ajax code which creates GET request for specified user and account-->
             $.ajax({
                     url: "http://localhost:55000/api/customers/" + customerId.value + "/accounts/" + accountNumber.value,
                     type: "GET",

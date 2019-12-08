@@ -15,6 +15,7 @@
         <button id="sign-up" onclick="createCustomer()">Create Customer</button>
         <a href="accounts.html">I have an account already</a>
 
+        <!--Create customer function - uses ajax to create URL with new customer details-->
         <script type="text/javascript">
             function createCustomer() {
                 var customerBox = document.getElementById("customerId");
@@ -35,7 +36,7 @@
                     "id": customerId,
                     "pin": pin
                 };
-
+            <!--Ajax code which creates POST request-->
                 $.ajax({
                         url: "http://localhost:55000/api/customers",
                         type: "POST",

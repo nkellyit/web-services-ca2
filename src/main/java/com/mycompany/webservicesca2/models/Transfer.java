@@ -1,11 +1,14 @@
 package com.mycompany.webservicesca2.models;
 
 public class Transfer {
+
+    //Variables
     private int destCustomer;
     private int destAccount;
     private double amount;
     private int pin;
 
+    //Setters and Getters
     public int getDestCustomer() {
         return destCustomer;
     }

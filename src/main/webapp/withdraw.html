@@ -16,12 +16,15 @@
 <button id="sign-up" onclick="withdraw()">Withdraw</button>
 
 <script type="text/javascript">
+    <!--Withdraw function-->
     function withdraw() {
         var customerBox = document.getElementById("customerId");
         var accountIdBox = document.getElementById("accountId");
         var ccNumBox = document.getElementById("ccNum");
         var amountBox = document.getElementById("amount");
         var pinBox = document.getElementById("pin");
+
+        <!--Ajax code which creates POST request-->
 
         $.ajax({
                 url: "http://localhost:55000/api/customers/" + customerBox.value + "/accounts/" + accountIdBox.value + "/withdraw",

@@ -1,10 +1,6 @@
 
 package com.mycompany.webservicesca2.models;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -12,27 +8,29 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author 
  */
 
-// [TO-DO] Unsure about XMLRootElement line - please confirm
-// [TO-DO] How to make ID incremental?
-
 @XmlRootElement
 public class Customer {
 
+	//Variables
 	private String firstName;
     private String lastName;
     private String email;
     private int id;
     private int pin;
-    
-	public Customer() {  }
 
+	//Empty Constructor
+	public Customer() {
+
+	}
+	//Constructor with parameters
     public Customer(int id, String firstName, String lastName, String email) {
     	this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
-    
+
+	//Setters and Getters
     public String getFirstName() {
 		return firstName;
 	}
@@ -73,19 +71,3 @@ public class Customer {
 		this.pin = pin;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

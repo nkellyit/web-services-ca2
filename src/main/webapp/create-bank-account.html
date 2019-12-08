@@ -8,13 +8,14 @@
     <body>
         <h1>Create Account</h1>
 
-        <input type="text" id="customerId" placeholder="Customer Id" />
-        <input type="text" id="sortCode" placeholder="Sort code" />
-        <input type="text" id="accountType" placeholder="Account type" />
+        <input type="text" id="customerId" placeholder="Customer ID" />
+        <input type="text" id="sortCode" placeholder="Sort Code" />
+        <input type="text" id="accountType" placeholder="Account Type" />
         <input type="password" id="pin" placeholder="PIN" />
         <button id="sign-up" onclick="createBankAccount()">Create Bank Account</button>
 
         <script type="text/javascript">
+        <!--Create bank account function-->
             function createBankAccount() {
                 var customerBox = document.getElementById("customerId");
                 var sortCodeBox = document.getElementById("sortCode");
@@ -25,16 +26,17 @@
                 var accountType = accountTypeBox.value;
                 var pin = pinBox.value;
 
+        <!--Ajax code which creates body of text to create new POST request-->
                 $.ajax({
                         url: "http://localhost:55000/api/customers/" + customerId + "/accounts/" + pin + "/" + sortCode + "/" + accountType,
                         type: "POST",
                         contentType: "application/json",
                         success: function(data) {
-                            alert("account number: " + data.accountNumber);
+                            alert("Account Created. Your Account Number is " + data.accountNumber);
                             window.location.replace("accounts.html");
                         },
                         error: function(textStatus, errorThrown) {
-                            alert("error");
+                            alert("Error. Please try again");
                         }
                     }
                 );

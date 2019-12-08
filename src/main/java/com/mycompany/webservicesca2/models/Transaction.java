@@ -1,8 +1,8 @@
 
 package com.mycompany.webservicesca2.models;
 
-import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  *
@@ -11,13 +11,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 //Unsure about XMLRootElement line - please confirm
 @XmlRootElement
 public class Transaction {
-    
+
+    //Variables
     private String transactionType;
     private Date date;
     private double amount;
     private String description;
     private double newBalance;
 
+    //Constructor with parameters
     public Transaction(String transactionType, double amount, String description, double initialBalance) {
         this.transactionType = transactionType;
         this.amount = amount;
@@ -30,6 +32,7 @@ public class Transaction {
         }
     }
 
+    //Setters and Getters
     public String getTransactionType() {
         return transactionType;
     }

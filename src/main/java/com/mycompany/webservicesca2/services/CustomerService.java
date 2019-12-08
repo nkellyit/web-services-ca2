@@ -2,6 +2,7 @@
 package com.mycompany.webservicesca2.services;
 
 import com.mycompany.webservicesca2.models.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +13,18 @@ import java.util.List;
 
 public class CustomerService {
 
+	//Variables
 	public static List<Customer> list = new ArrayList<>();
-
 	public static boolean init = true;
 
 	public CustomerService() {
 
 		if (init) {
 
-			Customer kevin = new Customer(101, "Kevin", "Kerin", "kkkkkkkkkkevin@gmail.com");
-			Customer johnathan = new Customer(202, "Johnathan", "Munster", "jjjjjjjjjjjohnathan@gmail.com");
-			Customer niall = new Customer(303, "Niall", "Kelly", "nnnnnnnnnnnniall@gmail.com");
+			//Dummy data
+			Customer kevin = new Customer(101, "Kevin", "Kerin", "kkevin@gmail.com");
+			Customer johnathan = new Customer(202, "Johnathan", "Munster", "johnathan@gmail.com");
+			Customer niall = new Customer(303, "Niall", "Kelly", "niall@gmail.com");
 
 			list.add(kevin);
 			list.add(johnathan);
@@ -32,10 +34,14 @@ public class CustomerService {
 		}
 	}
 
+	//Method that retrieves list containing all customer data
 	public List<Customer> getAllCustomers() {
 		return list;
 	}
-	
+
+	//Method that returns Customer object
+	//Parameter - customer ID
+	//returns Customer
 	public Customer getCustomer(int id) {
 		
 		for(Customer customer : list) {
@@ -45,7 +51,10 @@ public class CustomerService {
 		}
 		return new Customer(0, "", "", "");
 	}
-	
+
+	//Method that creates new customer
+	//Parameter - Customer c
+	//returns new Customer
 	public Customer createCustomer(Customer c) {
 	//	c.setId(list.size() + 1);
 		list.add(c);
@@ -55,10 +64,11 @@ public class CustomerService {
 		return c;
 	 }
 
+	 //Method that verifies correct PIN entry
+	 //Parameters - customer ID, attempted PIN
+	 //returns true for correct PIN, false for incorrect
 	 public boolean checkPin(int customerId, int pin) {
 		Customer customer = getCustomer(customerId);
 		return pin == customer.getPin();
 	 }
-	
-	
 }

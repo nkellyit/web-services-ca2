@@ -3,6 +3,7 @@ package com.mycompany.webservicesca2.models;
 public class Lodgement {
     private double amount;
     private String ccNum;
+    private int pin;
 
     public String getCcNum() {
         return ccNum;
@@ -18,5 +19,13 @@ public class Lodgement {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 }

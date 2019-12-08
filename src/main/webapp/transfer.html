@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<body>
+<h1>Transfer</h1>
+
+<input type="text" id="customerId" placeholder="Customer Id" />
+<input type="text" id="accountId" placeholder="From Account Number" />
+<input type="text" id="destCustomer" placeholder="To Customer" />
+<input type="text" id="destAccount" placeholder="To Account" />
+<input type="text" id="amount" placeholder="Amount" />
+<input type="password" id="pin" placeholder="Your PIN" />
+<button id="sign-up" onclick="transfer()">Transfer</button>
+
+<script type="text/javascript">
+    function transfer() {
+        var customerBox = document.getElementById("customerId");
+        var accountIdBox = document.getElementById("accountId");
+        var destCustomerBox = document.getElementById("destCustomer");
+        var destAccountBox = document.getElementById("destAccount");
+        var amountBox = document.getElementById("amount");
+        var pinBox = document.getElementById("pin");
+
+        $.ajax({
+                url: "http://localhost:55000/api/customers/" + customerBox.value + "/accounts/" + accountIdBox.value + "/transfer",
+                data: JSON.stringify({
+                    "destCustomer": parseInt(destCustomerBox.value),
+                    "destAccount": parseInt(destAccountBox.value),
+                    "amount": parseFloat(amountBox.value),
+                    "pin": parseInt(pinBox.value)
+                }),
+                type: "POST",
+                contentType: "application/json",
+                success: function(data) {
+                    window.location.replace("accounts.html");
+                },
+                error: function(textStatus, errorThrown) {
+                    alert("error");
+                }
+            }
+        );
+    }
+</script>
+</body>
+</body>
+</html>

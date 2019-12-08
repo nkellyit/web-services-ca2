@@ -22,6 +22,7 @@ public class Customer {
     private String lastName;
     private String email;
     private int id;
+    private int pin;
     
 	public Customer() {  }
 
@@ -63,7 +64,14 @@ public class Customer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
 }
 
 

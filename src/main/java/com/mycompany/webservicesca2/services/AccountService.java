@@ -108,6 +108,7 @@ public class AccountService {
 
     public Account createAccount(Account account) {
 		// account.setAccountNumber(accountList.size() + 1);
+		account.setAccountNumber(newAccountNumber(account.getCustomerId()));
 		accountList.add(account);
 		
 		System.out.println("201 - resource created with path: /account/" + String.valueOf("Create Account: " + account.getAccountNumber()));

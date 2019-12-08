@@ -6,42 +6,31 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
-        <h1>Sign Up</h1>
+        <h1>Create Account</h1>
+
         <input type="text" id="customerId" placeholder="Customer Id" />
-        <input type="text" id="firstName" placeholder="First name" />
-        <input type="text" id="lastName" placeholder="Last name" />
-        <input type="text" id="email" placeholder="Email" />
+        <input type="text" id="sortCode" placeholder="Sort code" />
+        <input type="text" id="accountType" placeholder="Account type" />
         <input type="password" id="pin" placeholder="PIN" />
-        <button id="sign-up" onclick="createCustomer()">Create Customer</button>
-        <a href="accounts.html">I have an account already</a>
+        <button id="sign-up" onclick="createBankAccount()">Create Bank Account</button>
 
         <script type="text/javascript">
-            function createCustomer() {
+            function createBankAccount() {
                 var customerBox = document.getElementById("customerId");
+                var sortCodeBox = document.getElementById("sortCode");
+                var accountTypeBox = document.getElementById("accountType");
                 var pinBox = document.getElementById("pin");
-                var firstNameBox = document.getElementById("firstName");
-                var lastNameBox = document.getElementById("lastName");
-                var emailBox = document.getElementById("email");
                 var customerId = customerBox.value;
-                var firstName = firstNameBox.value;
-                var lastName = lastNameBox.value;
-                var email = emailBox.value;
+                var sortCode = sortCodeBox.value;
+                var accountType = accountTypeBox.value;
                 var pin = pinBox.value;
 
-                var customer = {
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "email": email,
-                    "id": customerId,
-                    "pin": pin
-                };
-
                 $.ajax({
-                        url: "http://localhost:55000/api/customers",
+                        url: "http://localhost:55000/api/customers/" + customerId + "/accounts/" + pin + "/" + sortCode + "/" + accountType,
                         type: "POST",
-                        data: JSON.stringify(customer),
                         contentType: "application/json",
                         success: function(data) {
+                            alert("account number: " + data.accountNumber);
                             window.location.replace("accounts.html");
                         },
                         error: function(textStatus, errorThrown) {

@@ -4,6 +4,7 @@ public class Transfer {
     private int destCustomer;
     private int destAccount;
     private double amount;
+    private int pin;
 
     public int getDestCustomer() {
         return destCustomer;
@@ -27,5 +28,13 @@ public class Transfer {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Account</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="customerId" placeholder="Customer Id" />
+    <input type="text" id="accountNumber" placeholder="Account Number" />
+    <button onclick="getAccount()">Get account</button>
+    <div id="account"></div>
+    <a href="accounts.html">back to menu</a>
+    <script type="text/javascript">
+        function getAccount() {
+            var customerId = document.getElementById("customerId");
+            var accountNumber = document.getElementById("accountNumber");
+
+            $.ajax({
+                    url: "http://localhost:55000/api/customers/" + customerId.value + "/accounts/" + accountNumber.value,
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function(data) {
+                        document.getElementById("account").innerHTML = "accountNumber:" + data[0].accountNumber +
+                            "\naccountType:" + data[0].accountType +
+                            "\nbalance" + data[0].balance +
+                            "\nsortCode:" + data[0].sortCode;
+                    },
+                    error: function(textStatus, errorThrown) {
+                        alert("error");
+                    }
+                }
+            );
+        }
+    </script>
+</body>
+</html>

@@ -30,13 +30,16 @@ public class CustomerResource {
     }
 
     @POST
-    @Path("/{customerId}/accounts")
-    public Account createAccount(@PathParam("customerId") int customerId,@QueryParam("accountType") String accountType) {
+    @Path("/{customerId}/accounts/{pin}/{sortCode}/{accountType}")
+    public Account createAccount(@PathParam("customerId") int customerId,@PathParam("pin") int pin,@PathParam("sortCode") int sortCode,@PathParam("accountType") String accountType) {
+        if (!customerService.checkPin(customerId,pin)) {
+            return null;
+        }
         Account account = new Account();
         account.setAccountType(accountType);
         account.setCustomerId(customerId);
         account.setBalance(0.0);
-        account.setSortCode(776634);
+        account.setSortCode(sortCode);
         account.setAccountNumber(accountService.newAccountNumber(customerId));
         accountService.createAccount(account);
         return account;
@@ -45,18 +48,27 @@ public class CustomerResource {
     @POST
     @Path("/{customerId}/accounts/{accountId}/lodge")
     public Account lodgeToAccount(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId, Lodgement lodgement) {
+        if (!customerService.checkPin(customerId,lodgement.getPin())) {
+            return null;
+        }
         return accountService.lodgeToAccount(customerId, accountId, lodgement);
     }
 
     @POST
     @Path("/{customerId}/accounts/{accountId}/transfer")
     public Account transferToAccount(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId, Transfer transfer) {
+        if (!customerService.checkPin(customerId,transfer.getPin())) {
+            return null;
+        }
         return accountService.transferToAccount(customerId, accountId, transfer);
     }
 
     @POST
     @Path("/{customerId}/accounts/{accountId}/withdraw")
     public Account withdrawFromAccount(@PathParam("customerId") int customerId, @PathParam("accountId") int accountId, Withdrawal withdrawal) {
+        if (!customerService.checkPin(customerId,withdrawal.getPin())) {
+            return null;
+        }
         return accountService.withdrawFromAccount(customerId, accountId, withdrawal);
     }
 

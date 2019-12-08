@@ -54,6 +54,11 @@ public class CustomerService {
 		
 		return c;
 	 }
+
+	 public boolean checkPin(int customerId, int pin) {
+		Customer customer = getCustomer(customerId);
+		return pin == customer.getPin();
+	 }
 	
 	
 }

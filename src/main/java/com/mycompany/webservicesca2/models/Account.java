@@ -66,5 +66,4 @@ public class Account {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-    
 }

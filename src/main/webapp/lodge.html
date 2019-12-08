@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lodge</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<h1>Lodge</h1>
+
+<input type="text" id="customerId" placeholder="Customer Id" />
+<input type="text" id="accountId" placeholder="To Account Number" />
+<input type="text" id="ccNum" placeholder="From Credit card number" />
+<input type="text" id="amount" placeholder="Amount" />
+<input type="password" id="pin" placeholder="Your PIN" />
+<button id="sign-up" onclick="lodge()">Lodge</button>
+
+    <script type="text/javascript">
+        function lodge() {
+            var customerBox = document.getElementById("customerId");
+            var accountIdBox = document.getElementById("accountId");
+            var ccNumBox = document.getElementById("ccNum");
+            var amountBox = document.getElementById("amount");
+            var pinBox = document.getElementById("pin");
+
+            $.ajax({
+                    url: "http://localhost:55000/api/customers/" + customerBox.value + "/accounts/" + accountIdBox.value + "/lodge",
+                    data: JSON.stringify({
+                        "amount": parseFloat(amountBox.value),
+                        "ccNum": parseInt(ccNumBox.value),
+                        "pin": parseInt(pinBox.value)
+                    }),
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function(data) {
+                        window.location.replace("accounts.html");
+                    },
+                    error: function(textStatus, errorThrown) {
+                        alert("error");
+                    }
+                }
+            );
+        }
+    </script>
+</body>
+</html>
